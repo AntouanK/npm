@@ -12,6 +12,7 @@ var path = require('path')
 var port = exports.port = 1337
 exports.registry = 'http://localhost:' + port
 process.env.npm_config_loglevel = 'error'
+process.env.npm_config_progress = 'false'
 
 var npm_config_cache = path.resolve(__dirname, 'npm_cache')
 process.env.npm_config_cache = exports.npm_config_cache = npm_config_cache
@@ -68,7 +69,7 @@ exports.makeGitRepo = function (params, cb) {
   var added = params.added || ['package.json']
   var message = params.message || 'stub repo'
 
-  var opts = { cwd: root, env: { PATH: process.env.PATH }}
+  var opts = { cwd: root, env: { PATH: process.env.PATH } }
   var commands = [
     git.chainableExec(['init'], opts),
     git.chainableExec(['config', 'user.name', user], opts),
